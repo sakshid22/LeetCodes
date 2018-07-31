@@ -1,0 +1,13 @@
+//597
+
+select IFNULL(
+	cast (
+		(select count (DISTINCT requseter_id, accepter_id) 
+		from request_accepted) * 1.0
+		/
+		(select count (DISTINCT sender_id, send_to_id)
+		from  freind_request)
+		AS DECIMAL (3,2)
+		), 0.00
+	
+	) AS accept_rate
